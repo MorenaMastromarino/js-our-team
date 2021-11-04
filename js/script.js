@@ -33,42 +33,70 @@ const team = [
 ];
 
 const teamContainer = document.querySelector('.team-container');
-teamContainer.innerHTML = '';
 
 
+createContent();
 
-// ciclo lunghezza array team
-for (let member of team){
+//funzione che mi stampa il contenuto in html
+function createContent (){
 
-  // creazione team-card, card-image, card-text
-  const teamCard = document.createElement('div');
-  teamCard.className = 'team-card';
- 
-  const cardImage = document.createElement('div');
-  cardImage.className = 'card-image';
+  teamContainer.innerHTML = '';
 
-  const cardText = document.createElement('div');
-  cardText.className = 'card-text';
-
-  //aggiungo contenuto a card-image e card-text  
-  const memberName = member.name;
-  const memberRole = member.role;
-  const memberPhoto = member.photo;
-
-  cardImage.innerHTML = 
-  `
-    <img src="img/${memberPhoto}" alt="${memberName}"/>
-  `;
-
-  cardText.innerHTML = 
-  `
-    <h3>${memberName}</h3>
-    <p>${memberRole}</p>
-  `;
- 
-
-  //append
-  teamCard.append(cardImage, cardText);
-  teamContainer.append(teamCard);
+  for (let member of team){  
+    // creazione team-card, card-image, card-text
+    const teamCard = document.createElement('div');
+    teamCard.className = 'team-card';
+   
+    const cardImage = document.createElement('div');
+    cardImage.className = 'card-image';
+  
+    const cardText = document.createElement('div');
+    cardText.className = 'card-text';
+  
+    //aggiungo contenuto a card-image e card-text  
+    const memberName = member.name;
+    const memberRole = member.role;
+    const memberPhoto = member.photo;
+  
+    cardImage.innerHTML = 
+    `
+      <img src="img/${memberPhoto}" alt="${memberName}"/>
+    `;
+  
+    cardText.innerHTML = 
+    `
+      <h3>${memberName}</h3>
+      <p>${memberRole}</p>
+    `;
+     
+    //append
+    teamCard.append(cardImage, cardText);
+    teamContainer.append(teamCard);
+  
+  };
 
 }
+
+
+const addMemberButton = document.getElementById('addMemberButton');
+
+// click su Add
+addMemberButton.addEventListener('click', function(){
+  const InputName = document.getElementById('name').value; 
+  const InputRole = document.getElementById('role').value;
+  const InputImage = document.getElementById('image').value;
+
+  const newMember = {
+    name: InputName,
+    role: InputRole,
+    photo: InputImage 
+  }
+  console.log(newMember);
+
+  team.push(newMember);
+  console.log(team);
+
+  createContent();
+
+});
+
